@@ -4,9 +4,14 @@ from collections import Counter
 
 from preprocessing import *
 
+# TODO: make file and start scripts
 # nltk.download('stopwords')
 
 app = Flask(__name__)
+
+
+# persist this in some place
+search_history_list = []
 
 wiki = wikipediaapi.Wikipedia(
     'WikiInsights (lalwanidheeraj1234@gmail.com)',
@@ -39,8 +44,26 @@ def wiki_word_frequency():
     word_freq = Counter(words)
     top_words = dict(word_freq.most_common(n))
 
+    search_history_list.append({'n': n, 'topic': topic, 'top_words': top_words})
+
     return jsonify({'topic': topic, 'top_words': top_words})
 
+
+@app.route('/search-history', methods=['GET'])
+def search_history():
+    q = request.args.get('q', '').lower()
+
+    if q == '':
+        return jsonify({'q': q, 'data': search_history_list})
+
+    filtered_results = []
+
+    for entry in search_history_list:
+        topic = entry['topic'].lower()
+        if q == ''  or topic.startswith(q):
+            filtered_results.append(entry)
+
+    return jsonify({'q': q, 'data': list(filtered_results)})
 
 if __name__ == '__main__':
     app.run(debug=True)
