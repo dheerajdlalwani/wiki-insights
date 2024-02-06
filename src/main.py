@@ -1,20 +1,24 @@
 from flask import Flask, request, jsonify
 import wikipediaapi
+import os
 from collections import Counter
 
 from preprocessing import *
+
+from dotenv import load_dotenv
+
 
 # TODO: make file and start scripts
 # nltk.download('stopwords')
 
 app = Flask(__name__)
-
+load_dotenv()
 
 # persist this in some place
 search_history_list = []
 
 wiki = wikipediaapi.Wikipedia(
-    'WikiInsights (lalwanidheeraj1234@gmail.com)',
+    f'WikiInsights ({os.environ("USER_AGENT_EMAIL")})',
     'en',
     extract_format=wikipediaapi.ExtractFormat.WIKI
     )
