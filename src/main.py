@@ -25,16 +25,16 @@ def wiki_word_frequency():
     n = int(request.args.get('n'))
 
     # using this query param to control weather or not to perform preprocessing
-    if request.args.get('preprocess'):
-        preprocess = (request.args.get('preprocess').lower() == 'true')
+    if request.args.get('disable_preprocess'):
+        disable_preprocess = (request.args.get('disable_preprocess').lower() == 'true')
     else: # default value for preprocess is set to true
-        preprocess = True
+        disable_preprocess = False
 
     page = wiki.page(topic)
     
     if page.exists():
         page_content = page.text
-        if preprocess:
+        if not disable_preprocess:
             # Future TODO: Provide more granular control over preprocessing
             page_content = clean_text(page_content)
     else:
@@ -44,7 +44,7 @@ def wiki_word_frequency():
     word_freq = Counter(words)
     top_words = dict(word_freq.most_common(n))
 
-    search_history_list.append({'n': n, 'topic': topic, 'top_words': top_words, 'preprocess': preprocess})
+    search_history_list.append({'n': n, 'topic': topic, 'top_words': top_words, 'disable_preprocess': disable_preprocess})
 
     return jsonify({'topic': topic, 'top_words': top_words})
 
@@ -66,4 +66,4 @@ def search_history():
     return jsonify({'q': q, 'data': list(filtered_results)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

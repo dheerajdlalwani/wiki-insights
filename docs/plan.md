@@ -1,10 +1,6 @@
 Okay, 2 APIs.
 
-Word Frequency Count & Search History Endpoint.
-
-Make one module for a function which: takes text, n and returns the data they want.
-
-flow:
+## Word Frequency Count
 
 - ask topic and n
 - store query in cache
@@ -16,3 +12,15 @@ flow:
 - do preprocessing
 - get count
 - return count
+
+## Search History
+
+- store in an array temp
+- later move to relational DB (sqlite) or redis
+- empty query => return all search history
+- use starts with (later add fuzziness)
+
+## Server:
+
+- Makefile
+- docs
