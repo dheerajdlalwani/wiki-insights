@@ -24,3 +24,9 @@ Okay, 2 APIs.
 
 - Makefile
 - docs
+
+
+## Future:
+- add functional caching
+- move search history to redis/relational DB
+- check last modified and fetch only if its new?

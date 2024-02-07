@@ -44,3 +44,8 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
   - If `q` is an empty string, it returns all searches.
 - Sample Usage:
   - [http://127.0.0.1:5000/search-history?q=Bos](http://127.0.0.1:5000/search-history?q=Bos)
+
+## Tests
+
+- There are some basic API tests written in [test.py](src/test.py)
+- To run these tests, first start the API server using `make run` and in another terminal run `make test`
