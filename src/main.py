@@ -21,8 +21,15 @@ wiki = wikipediaapi.Wikipedia(
 
 @app.route('/wiki-word-frequency', methods=['GET'])
 def wiki_word_frequency():
+
+    if not request.args.get('topic') or not request.args.get('n'):
+        return jsonify({'error': 'Query params topic and n are required'}), 400
+
     topic = request.args.get('topic')
     n = int(request.args.get('n'))
+
+    if n <= 0:
+        return jsonify({'error': 'Please enter a valid n'}), 400
 
     # using this query param to control weather or not to perform preprocessing
     if request.args.get('disable_preprocess'):
