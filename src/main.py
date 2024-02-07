@@ -7,10 +7,6 @@ from preprocessing import *
 
 from dotenv import load_dotenv
 
-
-# TODO: make file and start scripts
-# nltk.download('stopwords')
-
 app = Flask(__name__)
 load_dotenv()
 
@@ -18,7 +14,7 @@ load_dotenv()
 search_history_list = []
 
 wiki = wikipediaapi.Wikipedia(
-    f'WikiInsights ({os.environ("USER_AGENT_EMAIL")})',
+    f'WikiInsights ({os.getenv("USER_AGENT_EMAIL")})',
     'en',
     extract_format=wikipediaapi.ExtractFormat.WIKI
     )
@@ -48,7 +44,7 @@ def wiki_word_frequency():
     word_freq = Counter(words)
     top_words = dict(word_freq.most_common(n))
 
-    search_history_list.append({'n': n, 'topic': topic, 'top_words': top_words})
+    search_history_list.append({'n': n, 'topic': topic, 'top_words': top_words, 'preprocess': preprocess})
 
     return jsonify({'topic': topic, 'top_words': top_words})
 
