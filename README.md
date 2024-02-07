@@ -6,6 +6,7 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
 
 ## Basic Setup
 
+- This setup assumes you are running it in a linux based environment
 - Create a `.env` file (use [sample.env](sample.env) as a reference) and fill in the values
 - Make sure you have the `make` utility installed.
 - If you do not have `make` installed, run the following commands:
@@ -34,6 +35,7 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
   - `disable_preprocess` (bool) = Can see the results by disabling preprocessing applied to the text.
   - Default value: `False`
 - Sample usage:
+  - Run the server and then visit the following URL
   - [http://127.0.0.1:5000/wiki-word-frequency?n=10&topic=Boston%20Tea%20Party](http://127.0.0.1:5000/wiki-word-frequency?n=10&topic=Boston%20Tea%20Party)
 
 ### Search History Endpoint
@@ -43,6 +45,7 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
   - `q` (string) = Query String - can search through the previous search history topics
   - If `q` is an empty string, it returns all searches.
 - Sample Usage:
+  - Run the server and then visit the following URL
   - [http://127.0.0.1:5000/search-history?q=Bos](http://127.0.0.1:5000/search-history?q=Bos)
 
 ## Tests
