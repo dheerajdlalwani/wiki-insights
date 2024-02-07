@@ -36,7 +36,22 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
   - Default value: `False`
 - Sample usage:
   - Run the server and then visit the following URL
-  - [http://127.0.0.1:5000/wiki-word-frequency?n=10&topic=Boston%20Tea%20Party](http://127.0.0.1:5000/wiki-word-frequency?n=10&topic=Boston%20Tea%20Party)
+  - [http://127.0.0.1:5000/wiki-word-frequency?n=7&topic=Boston%20Tea%20Party](http://127.0.0.1:5000/wiki-word-frequency?n=7&topic=Boston%20Tea%20Party)
+- Sample response:
+  ```
+  {
+    "top_words": {
+        "act": 48,
+        "american": 37,
+        "boston": 62,
+        "colony": 33,
+        "party": 54,
+        "tax": 33,
+        "tea": 162
+    },
+    "topic": "Boston Tea Party"
+  }
+  ```
 
 ### Search History Endpoint
 
@@ -46,7 +61,43 @@ This is a simple web app written in Flask to perform Word Frequency Analysis of 
   - If `q` is an empty string, it returns all searches.
 - Sample Usage:
   - Run the server and then visit the following URL
-  - [http://127.0.0.1:5000/search-history?q=Bos](http://127.0.0.1:5000/search-history?q=Bos)
+  - [http://127.0.0.1:5000/search-history?q=French](http://127.0.0.1:5000/search-history?q=French)
+- Sample Response:
+  ```
+  {
+  "data": [
+      {
+      "disable_preprocess": false,
+      "n": 7,
+      "top_words": {
+          "chip": 29,
+          "dish": 20,
+          "food": 19,
+          "french": 73,
+          "fried": 32,
+          "fry": 130,
+          "potato": 64
+      },
+      "topic": "French Fries"
+      },
+      {
+      "disable_preprocess": false,
+      "n": 7,
+      "top_words": {
+          "assembly": 49,
+          "france": 44,
+          "french": 87,
+          "new": 45,
+          "political": 48,
+          "revolution": 92,
+          "right": 40
+      },
+      "topic": "French Revolution"
+      }
+  ],
+  "q": "french"
+  }
+  ```
 
 ## Tests
 
